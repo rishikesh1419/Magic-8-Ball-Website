@@ -25,11 +25,27 @@
 	        "Outlook not so good.",
 	        "Very doubtful." ];
 			document.addEventListener('DOMContentLoaded', function(){
+				var card = document.getElementById("card");
+				cls = ["bg-dark", "bg-success", "bg-danger", "bg-warning", "text-white"];
 				document.querySelector("#ask").onclick = function(){
-					i = Math.floor(Math.random() * 20 + 1); 
+					i = Math.floor(Math.random() * 20);
+					if (i<10) {
+						card.classList.remove(...cls);
+						card.classList.add(...["bg-success"]);
+					}
+					else if (i<15) {
+						card.classList.remove(...cls);
+						card.classList.add("bg-warning");
+					}
+					else {
+						card.classList.remove(...cls);
+						card.classList.add(...["bg-danger","text-white"]);
+					}
 					document.querySelector("#answer").innerHTML = answers[i];
 				};
-				document.querySelector("#reset").onclick = function(){ 
+				document.querySelector("#reset").onclick = function(){
+					card.classList.remove(...cls);
+					card.classList.add(...["bg-dark","text-white"]);
 					document.querySelector("#answer").innerHTML = "Ask me anything!";
 				};
 			});
@@ -47,7 +63,7 @@
 		  			</div>
 				</div>
 				<div style="width: 78%; margin: auto; text-align: center;">
-					<div class="card shadow text-white bg-dark w-50" style="margin: auto;">
+					<div class="card shadow text-white bg-dark w-50" style="margin: auto;" id="card">
 		  				<div class="card-body">				
 		    				<h5 class="card-title" style="margin-bottom: 0px; font-weight: bolder;" id="answer">Ask me anything!</h5>
 		  				</div>
